@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/inventory")
@@ -25,9 +26,9 @@ public class InventoryController {
             return inventoryService.viewInventory();
         }
 
-    @GetMapping("/viewbyId/{productId}")
-    public Inventory viewbyProductId(@PathVariable("productId") Long productId){
-        return inventoryService.viewbyId(productId);
+    @GetMapping("/viewById/{productId}")
+    public Optional<Inventory> viewByProductId(@PathVariable("productId") Long productId){
+        return inventoryService.viewByProductId(productId);
     }
 
     @PutMapping("/update/{id}")
@@ -37,7 +38,7 @@ public class InventoryController {
     }
 
     @DeleteMapping("/delete/{productId}")
-    public String delete(@PathVariable("productId") Long productId){
+    public String deletePrice(@PathVariable Long productId){
         inventoryService.delete(productId);
         return "Deleted";
     }
